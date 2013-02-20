@@ -11,7 +11,7 @@ def now():
 # write common-error information into the file
 def recordError(host,keylist,content):
   time = now();
-  errorname = host + time + 'count.txt'
+  errorname = host + '-' + time + '-' + 'stat.txt'
   errorinfo = open(errorname,'w')
   length = len(keylist)
   it = iter(keylist)
@@ -26,7 +26,7 @@ def recordError(host,keylist,content):
   finally:
      errorinfo.close()
 
-  contentname = host + time + 'content.txt'
+  contentname = host + '-' + time + '-' + 'content.txt'
   contentinfo = open(contentname,'w')
   try:
      contentinfo.write(content)
