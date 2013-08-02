@@ -1,5 +1,8 @@
+import sys
+sys.path.append("../script/")
 import server
 import analyzetool 
+import errorinfo
 def servertest():
  serverlist = server.getserverlist()
  for s in serverlist:
@@ -12,4 +15,9 @@ def testanalyze():
  username = 'admin'
  password = 'alipaystable'
  analyzetool.analyzeSignal(host,path,filename,username,password)
-analyzetool.analyze()
+def testerrorinfo():
+ host = 'gege'
+ keylist = 'key'
+ content = 'conte'
+ errorinfo.recordError(host,keylist,content) 
+testerrorinfo()

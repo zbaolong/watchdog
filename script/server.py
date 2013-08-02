@@ -11,7 +11,7 @@ class Server:
  def _init_(self):pass
 
 def getserverlist():
- filename = 'server.txt'
+ filename = '../conf/server.txt'
  fileHandle = open(filename,'r')
  serverlist = []
  for line in fileHandle:

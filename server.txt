@@ -1,2 +1,0 @@
-ctu.stable.alipay.net,/home/admin/logs/ctu.stable.alipay.net,common-error.log,admin,alipaystable,
-ctu.stable.alipay.net,/home/admin/logs/ctu.stable.alipay.net,common-error.log,log,xixihaha,

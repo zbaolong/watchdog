@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # _*_ coding:utf-8 _*_
 
+import os
 import time
 import keyfactor
 
@@ -11,8 +12,12 @@ def now():
 # write common-error information into the file
 def recordError(host,keylist,content):
   time = now();
-  errorname = host + '-' + time + '-' + 'stat.txt'
-  errorinfo = open(errorname,'w')
+  path = '../result/'
+  if not os.path.exists(path):
+   os.makedirs(path)
+  
+  errorname = path + host + '-' + time + '-' + 'stat.txt'
+  errorinfo = open(errorname,'w+')
   length = len(keylist)
   it = iter(keylist)
   factor = keyfactor.KeyFactor()
@@ -25,8 +30,8 @@ def recordError(host,keylist,content):
      pass
   finally:
      errorinfo.close()
-
-  contentname = host + '-' + time + '-' + 'content.txt'
+  
+  contentname = path + host + '-' + time + '-' + 'content.txt'
   contentinfo = open(contentname,'w')
   try:
      contentinfo.write(content)
