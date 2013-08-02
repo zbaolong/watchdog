@@ -1,1 +1,0 @@
-2013-08-02 21:11:15,204 [//10.14.22.152/ - /riskcontrol/eventCodeConfigManage.htm] ERROR app.VelocityEngine - Left side ($!ctuEventCodeConfig.shuntRatio) of '!=' operation has null value. Operation not possible. riskcontrol/screen/eventCodeConfigManage.vm [line 102, column 118]
