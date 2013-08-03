@@ -5,35 +5,46 @@ import os
 import time
 import keyfactor
 
-#get current time
+# get current time
 def now():
-  return time.strftime('%Y%m%d%H%M%S',time.localtime(time.time()))
+    return time.strftime('%Y%m%d%H%M%S', time.localtime(time.time()))
 
 # write common-error information into the file
-def recordError(host,keylist,content):
-  time = now();
-  path = '../result/'
-  if not os.path.exists(path):
-   os.makedirs(path)
-  
-  errorname = path + host + '-' + time + '-' + 'stat.txt'
-  errorinfo = open(errorname,'w+')
-  length = len(keylist)
-  it = iter(keylist)
-  factor = keyfactor.KeyFactor()
-  try:
-     while True:
-       factor = it.next()
-       line = factor.keyWord + ':' + str(factor.keyCount) + '\n'
-       errorinfo.write(line)
-  except StopIteration:
-     pass
-  finally:
-     errorinfo.close()
-  
-  contentname = path + host + '-' + time + '-' + 'content.txt'
-  contentinfo = open(contentname,'w')
-  try:
-     contentinfo.write(content)
-  finally:
-     contentinfo.close()
+def recordError(host, keylist, content):
+    time = now();
+    path = '../result/'
+    if not os.path.exists(path):
+        os.makedirs(path)
+    
+    pubname = path + host + '-' + time + '-'
+    indexname = pubname + 'index.txt'
+    detailname = pubname + 'detail.txt'
+    timename = pubname + 'time.txt'
+    
+    indexinfo = open(indexname, 'w+')
+    detailinfo = open(detailname, 'w+')
+    timeinfo = open(timename, 'w+')
+    it = iter(keylist)
+    factor = keyfactor.KEYFACTOR()
+    try:
+        while True:
+            factor = it.next()
+            
+            index = 'keyword:' + factor.key_word + '\nkeycount:' + str(factor.key_count) + '\nfirsttime:' + factor.first_time + '\nlasttime:' + factor.last_time + "\n";
+            indexinfo.write(index)
+            
+            detail = index + "keycontent:" + factor.key_content + '\n'
+            detailinfo.write(detail)
+            
+            alltime = ''
+            for t in factor.time_list:
+                alltime = alltime + t + '\n'
+            time = index + "timelist:" + alltime + "\n"
+            timeinfo.write(time)
+            
+    except StopIteration:
+        pass
+    finally:
+        indexinfo.close()
+        detailinfo.close()
+        timeinfo.close()
