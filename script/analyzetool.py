@@ -27,11 +27,23 @@ def analyze(host, path, filename, username, password, port):
     print ',total time is %f \n' % (end - start)
     
 def getheadwords(line):
-    return re.split(r'\s{3}', line);
-    
-def getheadwords2(line):
     return re.split(r'\s+', line)
 
+def getkey(line):
+    allwords = getheadwords(line)
+    if allwords[2] == 'ERROR':
+        return allwords[3]
+    elif allwords[5] == 'ERROR':
+        return allwords[6]
+    else:
+        print 'the line is ' + line
+        print 'Error, can\'t find any error!'
+        
+
+def gettime(line):
+    allwords = getheadwords(line)
+    return (allwords[0] + ' ' + allwords[1])
+    
 def dowords(fileHandle, host, filename):
     keylist = []
     switch = False
@@ -42,10 +54,10 @@ def dowords(fileHandle, host, filename):
         head = re.match(timefmt, line)
         # end = time.time()
         # print 'math spends %f \n' % (end - start) 
+        factor = keyfactor.KEYFACTOR()
         if head:
             # start = time.time()
-            allwords = getheadwords2(line)
-            key = allwords[3]
+            key = getkey(line)
             # end = time.time()
             # print 'split spends %f \n' % (end - start)
             it = iter(keylist)
@@ -62,24 +74,24 @@ def dowords(fileHandle, host, filename):
             except StopIteration:
                 pass
             if exist == False:
-                factor = keyfactor.KEYFACTOR()
-                factor.key_word = allwords[3]
+                factor.key_word = key
                 factor.key_content = line
                 factor.key_count = 1
-                factor.first_time = allwords[1]
-                factor.last_time = allwords[1]
-                factor.time_list.append(allwords[1])
+                factor.first_time = gettime(line)
+                factor.last_time = gettime(line)
+                factor.time_list.append(gettime(line))
                 keylist.append(factor)
 
                 switch = True
                 content = content + line
 
             else:
-                factor.last_time = allwords[1]
-                factor.time_list.append(allwords[1])
+                factor.last_time = gettime(line)
+                factor.time_list.append(gettime(line))
         else:
             if switch == True:
                 content = content + line
+                factor.key_content = factor.key_content + line;
         # end = time.time()
         # print 'keyfactor spends %f \n' % (end - start)
     errorinfo.recordError(host, keylist, content)

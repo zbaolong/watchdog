@@ -1,1 +1,2 @@
-securityprodmng.577.alipay.net,/home/admin/logs/securityprodmng.577.alipay.net,common-error.log,admin,ctutest250,
+ctu-1-64.test.alipay.net,/home/admin/logs/ctu-1-64.test.alipay.net,common-error.log,admin,test@sec,
+ctutask-1-64.test.alipay.net,/home/admin/logs/ctutask-1-64.test.alipay.net,common-error.log,admin,ali88,

@@ -33,8 +33,8 @@ def recordError(host, keylist, content):
             index = 'keyword:' + factor.key_word + '\nkeycount:' + str(factor.key_count) + '\nfirsttime:' + factor.first_time + '\nlasttime:' + factor.last_time + "\n";
             indexinfo.write(index)
             
-            detail = index + "keycontent:" + factor.key_content + '\n'
-            detailinfo.write(detail)
+            # detail = index + "keycontent:" + factor.key_content + '\n'
+            detailinfo.write(content)
             
             alltime = ''
             for t in factor.time_list:

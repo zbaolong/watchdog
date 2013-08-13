@@ -7,7 +7,7 @@ class KEYFACTOR:
     # 错误关键字
     key_word = None
     # 错误的详细内容
-    key_content = None
+    key_content = ''
     # 错误的出现次数  
     key_count = 0
     # 错误的首次出现时间
