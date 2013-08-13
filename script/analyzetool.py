@@ -54,7 +54,7 @@ def dowords(fileHandle, host, filename):
         head = re.match(timefmt, line)
         # end = time.time()
         # print 'math spends %f \n' % (end - start) 
-        factor = keyfactor.KEYFACTOR()
+        
         if head:
             # start = time.time()
             key = getkey(line)
@@ -74,6 +74,7 @@ def dowords(fileHandle, host, filename):
             except StopIteration:
                 pass
             if exist == False:
+                factor = keyfactor.KEYFACTOR()
                 factor.key_word = key
                 factor.key_content = line
                 factor.key_count = 1
@@ -91,7 +92,7 @@ def dowords(fileHandle, host, filename):
         else:
             if switch == True:
                 content = content + line
-                factor.key_content = factor.key_content + line;
+                # factor.key_content = factor.key_content + line;
         # end = time.time()
         # print 'keyfactor spends %f \n' % (end - start)
     errorinfo.recordError(host, keylist, content)

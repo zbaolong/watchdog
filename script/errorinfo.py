@@ -30,7 +30,7 @@ def recordError(host, keylist, content):
         while True:
             factor = it.next()
             
-            index = 'keyword:' + factor.key_word + '\nkeycount:' + str(factor.key_count) + '\nfirsttime:' + factor.first_time + '\nlasttime:' + factor.last_time + "\n";
+            index = 'keyword:' + factor.key_word + '\nkeycount:' + str(factor.key_count) + '\nfirsttime:' + factor.first_time + '\nlasttime:' + factor.last_time + '\nindexinfo:' + factor.key_content + '\n';
             indexinfo.write(index)
             
             # detail = index + "keycontent:" + factor.key_content + '\n'
